@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
 import './App.css'
@@ -9,6 +9,41 @@ function App() {
   function addTodo(newTodo){
     setTodos([...todos,newTodo])
   }
+
+  function deleteTodo(id){
+    setTodos(
+      todos.filter(todo => todo.id !== id)
+    );
+  }
+
+  function updateTodo(id, updatedTodo){
+    setTodos(
+      todos.map(todo => {
+        if(todo.id === id){
+        return {
+          ...todo,
+          description: updatedTodo.description,
+          priority: updatedTodo.priority
+          }
+        }
+        return todo;
+      })
+    )
+  }
+
+  function completeTodo(id){
+    setTodos(
+      todos.map(todo => {
+        if(todo.id === id){
+        return {
+          ...todo,
+          completed: !todo.completed
+          }
+        }
+        return todo;
+      })
+    )
+  }
   
   return (
     <>
@@ -17,7 +52,12 @@ function App() {
 
       <TodoForm addTodo={addTodo}/>
 
-      <TodoList />
+      <TodoList 
+        todos={todos}
+        deleteTodo={deleteTodo}
+        updateTodo={updateTodo}
+        completeTodo={completeTodo}
+      />
     </>
   )
 }

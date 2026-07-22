@@ -1,9 +1,17 @@
 import TodoItem from './TodoItem';
 
-function TodoList({ todos, updateTodo, deleteTodo }) {
+function TodoList({ todos, updateTodo, deleteTodo, completeTodo }) {
   return (
     <>
-      {/* Add your components here */}
+      {todos.map(todo => (
+        <TodoItem 
+        key={todo.id}
+        todo={todo}
+        updateTodo={updateTodo}
+        deleteTodo={deleteTodo}
+        completeTodo={completeTodo}
+        /> 
+      ))}
     </>
   );
 }
