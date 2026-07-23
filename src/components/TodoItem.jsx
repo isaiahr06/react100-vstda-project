@@ -41,20 +41,29 @@ function TodoItem({ todo, updateTodo, deleteTodo, completeTodo}) {
   );
 }
   return (
-    <>
+    <div data-testid="todo-item" 
+          className={
+            todo.priority === "1"
+            ? "priority-high"
+            : todo.priority === "2"
+            ? "priority-medium"
+            : "priority-low"}>
+
       <h3>{todo.description}</h3>
+      
       <p>{todo.priority}</p>
 
       <input 
+        data-testid="complete-todo"
         type="checkbox"
         checked={todo.completed}
         onChange={() => completeTodo(todo.id)}
       />
 
-      <a onClick={() => setIsEditing(true)}>Edit</a>
+      <a data-testid="edit-todo" onClick={() => setIsEditing(true)}>Edit</a>
 
-      <a onClick={() => deleteTodo(todo.id)}>Delete</a>
-    </>
+      <a data-testid="delete-todo" onClick={() => deleteTodo(todo.id)}>Delete</a>
+    </div>
   );
 }
 

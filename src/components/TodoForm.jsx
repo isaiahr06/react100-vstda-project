@@ -29,12 +29,12 @@ function TodoForm({ addTodo }) {
         value={priority}
         onChange={(e) => setPriority(e.target.value)}
       >
-        <option value="1">Low</option>
+        <option value="1">High</option>
         <option value="2">Medium</option>
-        <option value="3">High</option>
+        <option value="3">Low</option>
       </select>
 
-      <button type="submit">Add Todo</button>
+      <button data-testid="create-todo" type="submit">Add Todo</button>
     </form>
   );
 }
