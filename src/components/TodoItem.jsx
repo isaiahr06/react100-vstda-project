@@ -17,7 +17,7 @@ function TodoItem({ todo, updateTodo, deleteTodo, completeTodo}) {
 
   if (isEditing) {
   return (
-    <form onSubmit={handleSave}>
+    <form className="edit-form" onSubmit={handleSave}>
       <textarea
         data-testid="update-todo-text"
         value={editDescription}
@@ -29,9 +29,9 @@ function TodoItem({ todo, updateTodo, deleteTodo, completeTodo}) {
         value={editPriority}
         onChange={(e) => setEditPriority(e.target.value)}
       >
-        <option value="1">Low</option>
+        <option value="1">High</option>
         <option value="2">Medium</option>
-        <option value="3">High</option>
+        <option value="3">Low</option>
       </select>
 
       <button data-testid="update-todo" type="submit">
@@ -41,13 +41,20 @@ function TodoItem({ todo, updateTodo, deleteTodo, completeTodo}) {
   );
 }
   return (
-    <div data-testid="todo-item" 
-          className={
-            todo.priority === "1"
-            ? "priority-high"
-            : todo.priority === "2"
-            ? "priority-medium"
-            : "priority-low"}>
+    <div 
+  data-testid="todo-item" 
+  className={`
+    todo-item
+    ${
+      todo.priority === "1"
+        ? "priority-high"
+        : todo.priority === "2"
+        ? "priority-medium"
+        : "priority-low"
+    }
+    ${todo.completed ? "completed" : ""}
+  `}
+>
 
       <h3>{todo.description}</h3>
       
